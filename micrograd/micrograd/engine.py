@@ -11,9 +11,16 @@ class Value:
         self.data = data
         self.grad = 0
         # internal variables used for autograd graph construction
-        self._backward = lambda: None
+        self._backward = lambda: None  # 空函数
+        # 每个Value对象初始化时都有一个_backward方法，默认为空操作。
+        # 运算时会被重新赋值为实际的反向传播函数。
+        # 反向传播时，调用v._backward(), 叶子节点执行空函数，运算节点执行实际的反向传播逻辑。
         self._prev = set(_children)
+        # previous的缩写，存储产生当前节点的前驱节点(子节点)
+        # set使用输入的元组_children构建一个集合(set)
         self._op = _op # the op that produced this node, for graphviz / debugging / etc
+        # operator的缩写，存储产生当前节点的操作。
+        # 单下划线前缀变量(如_backward,_prev,_op)表示“内部使用”的成员变量，按约定不应被外部直接访问或修改。
 
     def __add__(self, other):
         other = other if isinstance(other, Value) else Value(other)
