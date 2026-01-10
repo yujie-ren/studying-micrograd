@@ -1,3 +1,8 @@
+# engine.py实现了自动微分(automatic differentiation)的核心引擎，是micrograd的基础。
+# 微分: 数学概念，求导数。
+# 自动微分: 用计算机自动计算导数的方法。
+# 反向传播: 自动微分的一种实现方式，通过反向遍历计算图应用链式法则。
+
 
 class Value:
     """ stores a single scalar value and its gradient """
