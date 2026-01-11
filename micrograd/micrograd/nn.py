@@ -49,7 +49,11 @@ class Layer(Module):
 class MLP(Module):
 
     def __init__(self, nin, nouts):
-        sz = [nin] + nouts
+        # nin (int): num of inputs in input layer (layer0), nin=2表示输入样本有2个特征。Input layer实际不是由neuron组成的，只是输入的向量拍成一排。
+        # nouts (list): num of neurons from layer1 to output layer。nouts=[16, 16, 1]表示layer1(hidden layer 1)有16个neuron，layer2(hidden layer 2)有16个neuron，output layer有1个neuron。
+        # nin:int = 2
+        # nouts:list = [16, 16, 1]
+        sz = [nin] + nouts  # 所有层的尺寸列表(sizes)  [2, 16, 16, 1]
         self.layers = [Layer(sz[i], sz[i+1], nonlin=i!=len(nouts)-1) for i in range(len(nouts))]
 
     def __call__(self, x):
