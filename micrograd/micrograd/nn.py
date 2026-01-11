@@ -1,6 +1,7 @@
 import random
 from .engine import Value
 
+
 class Module:
 
     def zero_grad(self):
@@ -9,6 +10,7 @@ class Module:
 
     def parameters(self):
         return []
+
 
 class Neuron(Module):
 
@@ -27,6 +29,7 @@ class Neuron(Module):
     def __repr__(self):
         return f"{'ReLU' if self.nonlin else 'Linear'}Neuron({len(self.w)})"
 
+
 class Layer(Module):
 
     def __init__(self, nin, nout, **kwargs):
@@ -41,6 +44,7 @@ class Layer(Module):
 
     def __repr__(self):
         return f"Layer of [{', '.join(str(n) for n in self.neurons)}]"
+
 
 class MLP(Module):
 
