@@ -64,13 +64,14 @@ class Value:
         return out
 
     def backward(self):
+        # self:Value = Value(data=11.0, grad=0), 反向传播的起始节点c
 
         # topological order all of the children in the graph
-        topo = []
-        visited = set()
+        topo = []  # topo列表记录节点顺序
+        visited = set()  # visited集合记录已访问节点，避免重复访问
         def build_topo(v):
             if v not in visited:
-                visited.add(v)
+                visited.add(v)  
                 for child in v._prev:
                     build_topo(child)
                 topo.append(v)
@@ -78,8 +79,11 @@ class Value:
 
         # go one variable at a time and apply the chain rule to get its gradient
         self.grad = 1
-        for v in reversed(topo):
-            v._backward()
+        # reversed(topo) = [Value(data=11.0, grad=1), Value(data=3.0, grad=0), Value(data=3, grad=0), Value(data=1.0, grad=0), Value(data=8.0, grad=0), Value(data=2.0, grad=0), Value(data=4, grad=0)]
+        for v in reversed(topo):  # reversed函数用于反向遍历一个序列
+            v._backward()  
+        # Value类中定义了多个_backward()方法，一个节点如何决定要调用哪个_backward()?
+        # 看生成当前节点时的运算是什么？如果是两数相加得到当前节点，则调用__add__函数下的嵌套函数。
 
     def __neg__(self): # -self
         return self * -1
