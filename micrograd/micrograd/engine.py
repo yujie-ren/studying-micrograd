@@ -84,6 +84,7 @@ class Value:
             v._backward()  
         # Value类中定义了多个_backward()方法，一个节点如何决定要调用哪个_backward()?
         # 看生成当前节点时的运算是什么？如果是两数相加得到当前节点，则调用__add__函数下的嵌套函数。
+        # 调用当前节点的_backward()函数时，实际更新的是当前节点的前驱节点(生成该节点的节点)的梯度grad。
 
     def __neg__(self): # -self
         return self * -1
