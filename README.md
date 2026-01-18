@@ -1,6 +1,7 @@
 # studying-micrograd
 source: https://github.com/karpathy/micrograd
-
+李宏毅：
+https://www.youtube.com/watch?v=Dr-WRlEFefw&list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49&index=12
 
 ## 一次反向传播实际做了什么？
 
